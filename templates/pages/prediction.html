@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to right, rgb(243, 233, 233), #FFEBEE);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        place-items: center;
+        max-width: 600px;
+        width: 90%;
+        border-radius: 20px;
+        box-shadow: 0 8px 15px #e6367c;
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid rgb(176, 15, 109);
+        background: white;
+        margin: 20px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: rgb(176, 15, 109);
+    }
+
+    p {
+        text-align: center;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        background-color: #b01060;
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #EF9A9A;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 12px 20px;
+        background-color: #900d50;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #EF9A9A;
+    }
+
+    #result {
+        font-size: 26px;
+        color: #900d50;
+        margin-top: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #imagePreview {
+        display: none;
+        max-width: 90%;
+        max-height: 300px;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        overflow-x: auto;
+    }
+
+    #doctorsSection h2 {
+        text-align: center;
+        margin: 20px;
+        color: rgb(176, 15, 109);
+        font-size: 1.5rem;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 2px solid #ddd;
+        font-weight: bold;
+    }
+
+    th {
+        background-color: #fcdde2;
+        color: #900d50;
+    }
+
+    .stars {
+        color: gold;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        button, .custom-file-upload {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        #result {
+            font-size: 18px;
+        }
+
+        table {
+            font-size: 12px;
+            overflow-x: auto;
+            display: block;
+        }
+        #doctorsSection h2 {
+            font-size: 1.3rem;
+        }
+    }
+    
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 10px;
+        }
+
+        table {
+            font-size: 10px;
+        }
+        th, td {
+            padding: 8px;
+            word-wrap: break-word;
+        }
+        #doctorsSection h2 {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Detect Now</h1>
+        <p>Upload a medical image of your breast to determine whether you have breast cancer.<br>
+        If detected, find out whether it is malignant or benign.</p>
+
+        <label class="custom-file-upload">
+            <i class="fa-solid fa-upload"></i>
+            <span id="fileLabel"> Upload Image</span>  
+            <input type="file" id="imageInput" accept="image/*">
+        </label>
+
+        <button onclick="predict()">Predict</button>
+    </div>
+
+    <p id="result"></p>
+    <img id="imagePreview" alt="Uploaded Image" />
+
+    <!-- Doctors Table -->
+    <div id="doctorsSection" style="display: none;">
+        <h2>Recommended Doctors For You</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Specialty</th>
+                    <th>Location</th>
+                    <th>Contact</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody id="doctorsTable"></tbody>
+        </table>
+    </div>
+ 
+    <script>
+       function predict() {
+    let imageInput = document.getElementById("imageInput").files[0];
+    if (!imageInput) {
+        alert("Please select an image first.");
+        return;
+    }
+
+    let formData = new FormData();
+    formData.append("image", imageInput);
+
+    // Display image preview
+    let reader = new FileReader();
+    reader.onload = function () {
+        let imagePreview = document.getElementById("imagePreview");
+        imagePreview.src = reader.result;
+        imagePreview.style.display = "block";  
+    };
+    reader.readAsDataURL(imageInput);
+
+    // Check if the file is correct
+    if (!imageInput.name.toLowerCase().endsWith(".png")) {
+        document.getElementById("result").innerHTML = `
+            <div style="
+                color: #c62828;
+                padding: 15px;
+                margin-top: 20px;
+                font-weight: bold;
+               
+            ">
+                ❌ Error: This is a wrong image.
+            </div>
+        `;
+        // Hide doctors section if the image is wrong
+        document.getElementById('doctorsSection').style.display = 'none';
+    } else {
+        // If the file is correct, proceed to predict
+        fetch("/ai/predict/", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById("result").innerText = `❌ Error: ${data.error}`;
+            } else {
+                document.getElementById("result").innerHTML = `
+                    ${data.prediction} <br> 
+                    <span style="color: rgb(176, 15, 109); font-weight: bold;">${data.advice}</span>
+                `;
+
+                // Display doctors table
+                if (data.doctors) {
+                    let tableBody = '';
+                    data.doctors.forEach(doctor => {
+                        let stars = '';
+                        for (let i = 1; i <= 5; i++) {
+                            stars += i <= doctor.Rating ? '★' : '☆';
+                        }
+
+                        tableBody += `
+                            <tr>
+                                <td>${doctor.Name}</td>
+                                <td>${doctor.Specialty}</td>
+                                <td>${doctor.Location}</td>
+                                <td>${doctor.Contact}</td>
+                                <td class="stars">${stars}</td>
+                            </tr>
+                        `;
+                    });
+
+                    document.getElementById('doctorsTable').innerHTML = tableBody;
+                    document.getElementById('doctorsSection').style.display = 'block';
+                }
+            }
+        })
+        .catch(error => console.error("Something went wrong:", error));
+    }
+}
+
+    </script>
+    </body>
+    {% endblock %}
+</html>

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<ht>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detection Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background: #FFEBEE;
+            flex-direction: column;
+        }
+
+        .donation-container {
+        display: flex;
+        align-items: stretch; 
+        justify-content: space-between;
+        width: 90%;
+        max-width: 1200px;
+        border-radius: 20px;
+        box-shadow: 0 8px 15px rgba(216, 99, 146, 0.3);
+        margin-top: 30px;
+        border: 0px solid rgb(0,0,1);
+        background: #C2185B;
+        flex-wrap: wrap; /* Ensures responsiveness */
+        overflow: hidden; /* Prevents extra spacing */
+        margin-left: 240px;
+    }
+
+    .text {
+        flex: 1;
+        padding: 50px;
+        color: white;
+    }
+    .text h1 {
+        font-size: 41px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    .text p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .donate-btn {
+        display: inline-block;
+        background: #f8a2b5;
+        color: white;
+        padding: 17px 50px;
+        font-size: 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+        border: none;
+        margin-top: 35px;
+        cursor: pointer;
+    }
+
+    .donate-btn:hover {
+        background: #ff80a0;
+    }
+
+    .image {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Removes white space */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .donation-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .text {
+            padding: 30px;
+        }
+
+        .text p {
+            font-size: 16px;
+        }
+
+        .donate-btn {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+</style>
+
+<div class="donation-container">
+    <div class="text">
+        <h1>Your Donation Saves Lives!</h1>
+        <p>Your donation to <b>the Baheya Foundation</b> will play a vital role in providing treatment for a breast cancer patient. It will bring comfort to an entire family, restoring hope and security. 
+           <br> Your kindness will not only change lives but also bring deeper meaning and fulfillment to your own.</p>
+           <button class="donate-btn" onclick="window.location.href='https://baheya.org/en/donate'">
+            Donate now
+        </button>
+        
+    </div>
+    <div class="image">
+        <img src="{% static 'images/internationalwomenimage.jpg' %}" alt="Donation">
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Breast Cancer Detection{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.jpeg' %}" alt="Logo">
+                </a>
+                
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'predict_breast_cancer' %}">AI-Prediction</a></li>
+                <li><a href="{% url 'home' %}#how-it-works">How It Works</a></li>
+                <li><a href="{% url 'home' %}#features">Features</a></li>
+                <li><a href="{% url 'donation'%}">Donate to Baheya</a></li>
+                <li><a href="{% url 'selfExam' %}">Self Examination</a></li>
+                <li><a href="{% url 'faq' %}"> FAQ </a> </li>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content (Will be replaced by home.html content) -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+  
+    <footer>
+        <p>Copyright © 2025 by Breast Cancer Detection.  
+            <br> All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        
+        <div class="footer-logo">
+            <img src="{% static 'images\Breast-Cancer-Awareness-Month-Early-detection-saves-lives-2020.png' %}" alt="Logo">
+        </div>
+    </footer>
+    
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/YOUR-KIT-CODE.js" crossorigin="anonymous"></script>
+    
+</body>
+</html>

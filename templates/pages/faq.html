@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ- Breast Cancer Detection </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background: #FFEBEE;
+            flex-direction: column;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px #e6367c;
+        }
+
+        .faq-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color:#f6005a;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #d43967;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item:hover {
+            background-color: #e6e6e6;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-left: 3px solid #D81B60;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .arrow {
+            transition: transform 0.3s;
+            color: #D81B60 ;
+        }
+
+        .arrow.rotate {
+            transform: rotate(90deg);
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #D81B60;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .faq-title {
+                font-size: 1.5rem;
+            }
+
+            .faq-item {
+                padding: 8px;
+            }
+
+            .faq-answer {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-title {
+                font-size: 1.2rem;
+            }
+
+            .faq-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .arrow {
+                margin-top: 5px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="faq-container">
+        <a href="{%url 'home' %}" class="back-link">← Back</a>
+        <div class="faq-title">FAQ</div>
+
+         <!-- FAQ Item --> 
+          <div class="faq-item" onclick="toggleAnswer(this)">
+            <span>How does the AI detect breast cancer from ultrasound images?</span>
+            <span class="arrow">▶</span>
+          </div>
+
+          <div class="faq-answer">
+            It analyzes ultrasound images using AI models to detect if cancer is present or not. If cancer is detected, it identifies the type (e.g., benign or malignant) and provides a brief recommendation for further medical consultation.
+        </div>
+
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <span>What is a Breast Cancer Detection Tool?</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="faq-answer">
+            A web app that uses AI to analyze ultrasound images for early breast cancer detection.
+        </div>
+
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <span>Who should use this application?</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="faq-answer">
+            This web application is intended for medical professionals and patients seeking early detection of breast cancer.
+        </div>
+
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <span>Does this tool replace the Doctor?</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="faq-answer">
+            No, the tool assists doctors by providing additional insights but does not replace professional medical evaluation.
+        </div>
+
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <span>Is my data safe and private?</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="faq-answer">
+            Yes, your personal information is stored securely and used only for diagnostic purposes.
+        </div>
+
+        
+    </div>
+
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow');
+
+            if (answer.style.display === "none" || answer.style.display === "") {
+                answer.style.display = "block";
+                arrow.classList.add('rotate');
+            } else {
+                answer.style.display = "none";
+                arrow.classList.remove('rotate');
+            }
+        }
+    </script>
+    {% endblock %}
+</body>
+
+
+

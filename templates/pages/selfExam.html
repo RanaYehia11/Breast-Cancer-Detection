@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detection Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background: white;
+            flex-direction: column;
+           
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            
+        }
+        .steps {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(239, 154, 154, 0.5);
+            position: relative;
+            padding-left: 70px;
+            background: #fcedef;
+
+            
+        }
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .steps h1 {
+            font-size: 80px;
+            color: #eb457c;
+            position: absolute;
+            top: -5px;
+            left: 18px;
+            opacity: 0.3;
+            font-weight: bold;
+            
+        }
+        .steps h2 {
+            font-size: 30px;
+            color: #C2185B;
+            margin-bottom: 10px;
+            max-width: 100%;
+            margin-top: 80px;
+            
+        }
+        .steps p {
+            font-size: 20px;
+            color: #444;
+            max-width: 60%;
+        }
+        .steps ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        .steps ul li {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+       .steps ul li i {
+            color: #df4976;
+            margin-right: 10px;
+        }
+        .steps img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0.9;
+            margin-right: 20px;
+        }
+        img:hover {
+            opacity: 0.8;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .step {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            img {
+                width: 220px;
+                height: 220px;
+                margin-top: 15px;
+            }
+        }
+        hr {
+            background-color: #ecc9c9;
+            height: 2px; 
+            
+            border: none;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="steps">
+            <div class="step">
+                <h1>1</h1>
+                <div>
+                    <h2>Take a good look at your breasts in the mirror.</h2>
+                    <p>Take a good look at your breasts in the mirror and start by looking for changes in the shape, size, or position of your nipples.</p>
+                    <strong>Do you have any of these symptoms?</strong>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-check"></i> Breast or nipple pain</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Nipple discharge</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Nipple retraction or inversion</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Change in size/shape of the breast or asymmetry of the nipples</li>
+                    </ul>
+                </div>
+                <img src="{% static 'images/step1.png' %}" alt="Step 1">
+            </div>
+
+            <div class="step">
+                <h1>2</h1>
+                <div>
+                    <h2>Raise your arms in the air.</h2>
+                    <p>After checking your nipples, raise your arms in the air and look for any distortion of your breasts, such as dimpling of the skin.</p>
+                    <strong>Do you have any of these symptoms?</strong>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-check"></i> Visible lumps</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Skin dimpling</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Redness</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Swelling</li>
+                    </ul>
+                </div>
+                <img src="{% static 'images/step2.png' %}" alt="Step 2">
+            </div>
+
+            <div class="step">
+                <h1>3</h1>
+                <div>
+                    <h2>Examine your left underarm area.</h2>
+                    <p>Examine your left underarm area with your right hand, running your fingers downwards looking for lumps. Repeat for the right underarm using your left hand.</p>
+                    <strong>Do you have any of these symptoms?</strong>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-check"></i> Palpable breast lump in the armpit</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Swelling of the arm</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Tender swelling under the arm</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Lymph node changes</li>
+                    </ul>
+                </div>
+                <img src="{% static 'images/step3.png' %}" alt="Step 3">
+            </div>
+
+            <div class="step">
+                <h1>4</h1>
+                <div>
+                    <h2>Standing or Shower Check</h2>
+                    <p>While standing (or in the shower), use the same circular motion to feel for any lumps or thickening. Wet skin makes it easier to detect unusual changes.</p>
+                </div>
+                <img src="{% static 'images/step4.png' %}" alt="Step 4">
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <hr>
+</body>
+</html>
+{% endblock %}
