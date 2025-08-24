@@ -10,11 +10,6 @@ This is a Django-based web application that allows users to upload breast ultras
 - Self-examination and FAQ sections
 - Donation support page
 
-### What I have reached so far?
-- 99.44% training accuracy.
-- 94% validation accuracy.
-- 0.017 training loss.
-- 0.3 validation loss.
 
 ## Requirements
 All dependencies are listed in `requirements.txt`.
@@ -22,4 +17,5 @@ All dependencies are listed in `requirements.txt`.
 To install them, run:
 ```bash
 pip install -r requirements.txt
+
 
